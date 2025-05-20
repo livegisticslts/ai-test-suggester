@@ -2,15 +2,19 @@ name: "AI Test Suggestions"
 description: "Based on what was changed, what should a developer, QA, or reviewer do to verify it works?"
 inputs:
   GITHUB_TOKEN:
+    description: "GitHub token for authentication"
     required: true
   OPENAI_API_KEY:
+    description: "OpenAI API key for generating suggestions"
     required: true
   OPENAI_API_MODEL:
+    description: "OpenAI model to use for generating suggestions"
     required: false
     default: "gpt-4"
   exclude:
+    description: "Comma-separated list of file patterns to exclude from analysis"
     required: false
     default: ""
 runs:
-  using: "node16"
+  using: "node20"
   main: "dist/index.js"

@@ -1,34 +1,95 @@
-# AI Test Suggestion GitHub Action
+# AI Test Suggester
 
-This GitHub Action uses OpenAI's GPT model to review pull request diffs and suggest how to test them.
+A GitHub Action that automatically suggests test cases for pull requests using OpenAI's GPT models.
 
-## Inputs
+## Features
 
-| Input              | Required | Description                 |
-| ------------------ | -------- | --------------------------- |
-| `GITHUB_TOKEN`     | ✅       | GitHub token for API access |
-| `OPENAI_API_KEY`   | ✅       | OpenAI API key              |
-| `OPENAI_API_MODEL` | ❌       | Default: `gpt-4`            |
-| `exclude`          | ❌       | Glob patterns to exclude    |
+- Analyzes pull request changes
+- Generates test suggestions using AI
+- Posts suggestions as PR comments
+- Configurable file exclusions
+- Supports multiple AI models
 
 ## Usage
 
+Add the following to your GitHub Actions workflow:
+
 ```yaml
-- uses: my-org/ai-test-suggester@main
-  with:
-    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+name: AI Test Suggestions
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  suggest-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: your-org/ai-test-suggester@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_MODEL: gpt-4  # Optional, defaults to gpt-4
+          exclude: "*.md,*.txt"    # Optional, comma-separated patterns
 ```
 
-## Output
+## Inputs
 
-Posts a PR comment like:
+| Name | Description | Required | Default |
+|------|-------------|----------|---------|
+| `GITHUB_TOKEN` | GitHub token for authentication | Yes | - |
+| `OPENAI_API_KEY` | OpenAI API key for generating suggestions | Yes | - |
+| `OPENAI_API_MODEL` | OpenAI model to use | No | gpt-4 |
+| `exclude` | Comma-separated list of file patterns to exclude | No | "" |
 
-```md
-🧪 **AI Test Suggestions**
+## Development
 
-### src/payment.ts
+### Prerequisites
 
-- Add unit test for currency rounding.
-- Simulate edge case for invalid exchange rates.
+- Node.js 20 or later
+- npm 9 or later
+
+### Setup
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+### Available Scripts
+
+- `npm run build` - Build the TypeScript code
+- `npm run test` - Run tests
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+- `npm run type-check` - Check TypeScript types
+
+### Testing
+
+The project uses Jest for testing. Run tests with:
+
+```bash
+npm test
 ```
+
+### Building
+
+Build the project with:
+
+```bash
+npm run build
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Run tests and linting
+5. Submit a pull request
+
+## License
+
+MIT
