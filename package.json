@@ -4,10 +4,17 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "prepare": "npm run build",
     "test": "echo 'No tests specified'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@octokit/rest": "^20.0.0",
+    "minimatch": "^9.0.0",
+    "openai": "^4.0.0",
+    "parse-diff": "^0.13.0"
+  },
   "devDependencies": {
-    "typescript": "^4.0.0"
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   }
 }
