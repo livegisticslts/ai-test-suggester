@@ -1,1 +1,3 @@
-export default function main(): Promise<void>;
+declare function main(): Promise<void>;
+
+export { main as default };
