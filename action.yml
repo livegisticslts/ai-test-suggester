@@ -1,5 +1,16 @@
-name: 'AI Test Suggester'
-description: 'Suggests additional tests for your code'
+name: "AI Test Suggestions"
+description: "Based on what was changed, what should a developer, QA, or reviewer do to verify it works?"
+inputs:
+  GITHUB_TOKEN:
+    required: true
+  OPENAI_API_KEY:
+    required: true
+  OPENAI_API_MODEL:
+    required: false
+    default: "gpt-4"
+  exclude:
+    required: false
+    default: ""
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: "node16"
+  main: "dist/index.js"
