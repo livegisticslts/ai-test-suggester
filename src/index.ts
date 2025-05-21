@@ -94,6 +94,7 @@ async function getAIResponse(prompt: string): Promise<string> {
     const res = await openai.chat.completions.create({
       model,
       temperature: 0.3,
+      max_completion_tokens: 600,
       messages: [{ role: "system", content: prompt }],
     });
     return res.choices[0]?.message?.content?.trim() || "";
