@@ -72,7 +72,7 @@ async function getDiff(owner: string, repo: string, pull_number: number): Promis
 }
 
 function createPrompt(file: File, chunk: Chunk, pr: PRDetails): string {
-  return `You are a senior QA engineer. Suggest how someone should test the following code change—manually, with automation, or through exploratory testing.
+  return `You are a senior QA engineer. Suggest how a developer can test the following code changes within their local environment.
 
 Pull Request Title: ${pr.title}
 Pull Request Description:
@@ -86,7 +86,11 @@ ${chunk.content}
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ${chunk.changes.map((c: any) => `${c.ln ?? c.ln2 ?? ""} ${c.content}`).join("\n")}
 \`\`\`
-Respond with clear bullet points.`;
+Respond with clear bullet points.
+Make sure it's developer friendly language.
+Make sure you only provide instructions for the developer to test the code changes.
+Make sure you it's not that much to read.
+`;
 }
 
 async function getAIResponse(prompt: string): Promise<string> {
